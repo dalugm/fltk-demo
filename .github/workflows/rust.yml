@@ -1,0 +1,20 @@
+name: build
+
+on:
+  workflow_dispatch:
+  
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+        arch: [x86_64, aarch64]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo build --release --verbose
